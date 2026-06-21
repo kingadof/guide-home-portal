@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ayx · 知识库入口</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f4f9fb;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #1b2e35;
+            line-height: 1.6;
+            padding: 2rem 1.25rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page {
+            max-width: 1120px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+        }
+
+        /* header */
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.8rem;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+        }
+
+        .site-header h1 {
+            font-size: 1.6rem;
+            font-weight: 550;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #0f766e 0%, #14b8a6 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .site-header .badge {
+            background: #e2f0ef;
+            padding: 0.3rem 1rem 0.3rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            color: #0b5e58;
+            border: 1px solid #b6d8d4;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+        }
+
+        .badge::before {
+            content: "⏺";
+            font-size: 0.7rem;
+            color: #0f766e;
+        }
+
+        /* hero */
+        .hero {
+            background: #ffffffea;
+            backdrop-filter: blur(2px);
+            border-radius: 28px;
+            padding: 2.8rem 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 8px 28px rgba(13, 94, 85, 0.06);
+            border: 1px solid #d8ece8;
+            transition: box-shadow 0.2s;
+        }
+
+        .hero h2 {
+            font-size: 2.1rem;
+            font-weight: 480;
+            color: #13433e;
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #2f4d4a;
+            max-width: 700px;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero .highlight {
+            background: #e5f6f2;
+            padding: 0.1rem 0.5rem;
+            border-radius: 6px;
+            color: #0f5f58;
+            font-weight: 450;
+        }
+
+        /* 网格卡片区 */
+        .grid-zone {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin: 2.2rem 0 2.8rem 0;
+        }
+
+        .card {
+            background: white;
+            border-radius: 22px;
+            padding: 1.8rem 1.4rem 1.6rem;
+            border: 1px solid #d5e7e3;
+            box-shadow: 0 4px 12px rgba(18, 90, 80, 0.03);
+            transition: transform 0.1s ease, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            border-color: #82c4bb;
+            transform: translateY(-3px);
+        }
+
+        .card .card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #0f766e;
+        }
+
+        .card h3 {
+            font-weight: 520;
+            font-size: 1.15rem;
+            color: #14433e;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.4rem;
+        }
+
+        .card p, .card .card-desc {
+            font-size: 0.95rem;
+            color: #3a5a56;
+            flex: 1;
+            margin-bottom: 0.6rem;
+        }
+
+        .card .tag {
+            align-self: flex-start;
+            background: #e1f0ed;
+            color: #0a5f56;
+            font-size: 0.7rem;
+            font-weight: 500;
+            padding: 0.15rem 0.7rem;
+            border-radius: 30px;
+            letter-spacing: 0.02em;
+            margin-top: 0.3rem;
+        }
+
+        /* 提示区 / 信息区 合并为双栏 */
+        .info-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin: 2.5rem 0 2.2rem;
+        }
+
+        .info-box {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.8rem 2rem 2rem;
+            flex: 1 1 260px;
+            border: 1px solid #d0e2dd;
+            box-shadow: 0 4px 14px rgba(18, 76, 69, 0.03);
+        }
+
+        .info-box .info-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #2f7a71;
+            font-weight: 530;
+            margin-bottom: 1.2rem;
+            border-bottom: 1px dashed #bfd9d3;
+            padding-bottom: 0.6rem;
+        }
+
+        .info-box ul, .info-box .faq-item {
+            list-style: none;
+        }
+
+        .info-box li, .faq-item {
+            padding: 0.4rem 0;
+            border-bottom: 1px solid #edf5f2;
+            font-size: 0.95rem;
+            color: #1c3e3a;
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+
+        .info-box li::before {
+            content: "⦿";
+            color: #2b9b8b;
+            font-size: 0.55rem;
+            margin-right: 0.2rem;
+        }
+
+        .faq-item q {
+            font-style: normal;
+            color: #0b4e46;
+        }
+
+        .faq-item .ans {
+            display: block;
+            color: #456662;
+            margin-top: 0.2rem;
+            font-size: 0.9rem;
+            padding-left: 1rem;
+        }
+
+        .info-box .reminder {
+            background: #edf8f4;
+            padding: 0.7rem 1rem;
+            border-radius: 18px;
+            margin-top: 1.2rem;
+            color: #11524a;
+            font-size: 0.9rem;
+            border-left: 3px solid #2f9f90;
+        }
+
+        /* 再次访问句子区 */
+        .revisit-note {
+            background: #e0f2ee;
+            border-radius: 60px;
+            padding: 1rem 2rem 1rem 2.2rem;
+            margin: 1.8rem 0 2rem;
+            display: inline-block;
+            font-size: 1rem;
+            color: #104b43;
+            border: 1px solid #b3d3cc;
+            max-width: 100%;
+        }
+
+        .revisit-note a {
+            color: #0a6e62;
+            font-weight: 550;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #7abbb0;
+        }
+
+        .revisit-note a:hover {
+            color: #075047;
+            text-decoration-color: #06463e;
+        }
+
+        /* 收藏区 */
+        .bookmark-zone {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 1.8rem 2.2rem;
+            border: 1px solid #cde3dd;
+            margin: 2rem 0 2.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem 2rem;
+        }
+
+        .bookmark-zone .text-block {
+            flex: 2 1 200px;
+        }
+
+        .bookmark-zone .text-block p {
+            font-size: 0.98rem;
+            color: #1d4a44;
+        }
+
+        .bookmark-zone .text-block strong {
+            color: #0f6b60;
+        }
+
+        .bookmark-zone .btn-outline {
+            background: transparent;
+            border: 1px solid #279687;
+            color: #16685d;
+            padding: 0.5rem 1.6rem;
+            border-radius: 60px;
+            font-weight: 480;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: 0.15s;
+            white-space: nowrap;
+        }
+
+        .bookmark-zone .btn-outline:hover {
+            background: #e5f7f2;
+            border-color: #1d7f72;
+        }
+
+        /* 底部 */
+        .footer-note {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #6c8983;
+            border-top: 1px solid #d2e5df;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            letter-spacing: 0.02em;
+        }
+
+        .footer-note a {
+            color: #1b7569;
+            text-decoration: none;
+        }
+
+        .footer-note a:hover {
+            text-decoration: underline;
+        }
+
+        /* 响应式 */
+        @media (max-width: 640px) {
+            body {
+                padding: 1.2rem 0.8rem;
+            }
+            .hero {
+                padding: 2rem 1.2rem;
+            }
+            .hero h2 {
+                font-size: 1.7rem;
+            }
+            .grid-zone {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+            .info-panel {
+                flex-direction: column;
+            }
+            .bookmark-zone {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: left;
+                padding: 1.4rem 1.2rem;
+            }
+            .bookmark-zone .btn-outline {
+                align-self: flex-start;
+            }
+            .revisit-note {
+                border-radius: 40px;
+                padding: 0.8rem 1.2rem;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .grid-zone {
+                grid-template-columns: 1fr;
+            }
+            .site-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <header class="site-header">
+        <h1>◈ ayx · 知识库</h1>
+        <span class="badge">再次来访 · 持续关注</span>
+    </header>
+
+    <section class="hero">
+        <h2>常回来，总会有新东西</h2>
+        <p>这里不是一次性的信息页。如果你曾收藏过 <span class="highlight">ayx</span> 或只是偶然路过，这一版内容希望能成为你习惯性返回的起点。</p>
+        <p style="margin-top: 0.8rem; font-size: 1rem; color: #2a5b55;">目录化的卡片、简短的提示、常见问题摘要——用更适合回顾的方式组织。</p>
+    </section>
+
+    <!-- 网格卡片 目录感 -->
+    <div class="grid-zone">
+        <div class="card">
+            <div class="card-icon">📋</div>
+            <h3>栏目导览</h3>
+            <p class="card-desc">快速定位关注点：场景、工具、说明或更新记录。</p>
+            <span class="tag">目录</span>
+        </div>
+        <div class="card">
+            <div class="card-icon">📌</div>
+            <h3>常用路径</h3>
+            <p class="card-desc">指向 <a href="https://home-portal-ayx.com" style="color: #0f766e; text-decoration: underline; font-weight: 500;">ayx</a> 主页的稳定链接，适合保存到书签栏。</p>
+            <span class="tag">直达</span>
+        </div>
+        <div class="card">
+            <div class="card-icon">🔄</div>
+            <h3>更新节奏</h3>
+            <p class="card-desc">不定期调整内容结构和信息卡片，保持新鲜但不断裂。</p>
+            <span class="tag">变化</span>
+        </div>
+        <div class="card">
+            <div class="card-icon">🧩</div>
+            <h3>周边参考</h3>
+            <p class="card-desc">一些关联片段或提示，帮助理解知识库的背景脉络。</p>
+            <span class="tag">扩展</span>
+        </div>
+    </div>
+
+    <!-- 双栏信息区：提示与 FAQ 摘要 -->
+    <div class="info-panel">
+        <div class="info-box">
+            <div class="info-title">📎 提示·备忘</div>
+            <ul>
+                <li>如果这是你第二次打开，留意卡片内容是否已有调整</li>
+                <li>收藏夹内的链接建议每季度回来点一次，保持有效</li>
+                <li>页面结构可能微调，但核心入口始终不变</li>
+            </ul>
+            <div class="reminder">📬 持续关注的方式：不定期访问，或通过相关社区了解动态。</div>
+        </div>
+        <div class="info-box">
+            <div class="info-title">❓ 常见问题摘要</div>
+            <div class="faq-item">
+                <q>页面会频繁变动吗？</q>
+                <span class="ans">不会。内容和卡片会阶段调整，但链接结构保持相对稳定。</span>
+            </div>
+            <div class="faq-item">
+                <q>如何快速回到这里？</q>
+                <span class="ans">将首页 <a href="https://home-portal-ayx.com" style="color: #0f766e; text-decoration: underline;">ayx</a> 添加为书签，或记住此域名。</span>
+            </div>
+            <div class="faq-item">
+                <q>信息是否经过验证？</q>
+                <span class="ans">页面内容基于可查资料整理，不包含未经核实的断言。</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 再次访问 句子 + 链接自然嵌入 -->
+    <div class="revisit-note">
+        ⏺ 如果你是通过收藏夹或历史记录再次找到这里，欢迎。保持对 <a href="https://home-portal-ayx.com">ayx</a> 的关注，页面信息会伴随调整慢慢丰富。
+    </div>
+
+    <!-- 收藏与持续关注区块 -->
+    <div class="bookmark-zone">
+        <div class="text-block">
+            <p><strong>◈ 建议收藏</strong> — 把首页加入浏览器书签，或记下域名。下次想回来时不用重新搜索。</p>
+            <p style="margin-top: 0.2rem; font-size: 0.9rem; color: #3d6962;">持续关注意味着你认可这个信息源的价值，它也会在迭代中变得更贴合你的使用习惯。</p>
+        </div>
+        <a href="https://home-portal-ayx.com" class="btn-outline">ayx</a>
+    </div>
+
+    <!-- 相关信息区（小型） -->
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem; background: #eef7f4; border-radius: 24px; padding: 1.4rem 1.8rem; margin: 1rem 0 1.5rem; border: 1px solid #c6ddd6;">
+        <span style="font-weight: 450; color: #1f6158;">相关信息 ·</span>
+        <span style="color: #2c6057;">知识库入口保持单向链接风格</span>
+        <span style="color: #54837b; margin-left: auto; font-size: 0.9rem;">上次调整：近期</span>
+    </div>
+
+    <footer class="footer-note">
+        <a href="https://home-portal-ayx.com">ayx</a> · 知识库入口式页面 · 持续关注建议<br>
+        <span style="opacity: 0.6;">内容真实克制 · 移动端友好 · 蓝绿网格</span>
+    </footer>
+</div>
+</body>
+</html>
