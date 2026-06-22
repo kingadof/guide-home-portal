@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>彩票网 · 一目了然的选号面板</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #faf6f0;
+      font-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.7;
+      color: #2e2b27;
+      padding: 2rem 1.5rem 3rem;
+    }
+    .page {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #fffcf7;
+      border-radius: 32px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.04), 0 2px 6px rgba(90,70,50,0.06);
+      padding: 2.8rem 2.2rem;
+    }
+
+    /* 标题区 */
+    .hero {
+      border-bottom: 2px solid #ece3d7;
+      padding-bottom: 1.8rem;
+      margin-bottom: 2.4rem;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #3a3028;
+    }
+    .hero .sub {
+      display: block;
+      margin-top: 0.4rem;
+      font-size: 1rem;
+      color: #7a6e62;
+      font-weight: 400;
+    }
+
+    /* 正文排版 */
+    .intro p, .section p, .faq-item p {
+      margin-bottom: 1.2rem;
+      font-size: 1rem;
+    }
+    .intro p:last-child { margin-bottom: 0; }
+
+    /* 引用 / 提示框 */
+    .insight {
+      background: #f0ebe2;
+      border-left: 6px solid #b7a58c;
+      padding: 1.2rem 1.6rem;
+      margin: 2rem 0;
+      border-radius: 0 14px 14px 0;
+      color: #3d352e;
+    }
+    .insight p {
+      margin-bottom: 0.4rem;
+      font-size: 0.95rem;
+    }
+    .insight p:last-child { margin-bottom: 0; }
+    .insight strong {
+      color: #4f3f30;
+    }
+
+    .note-box {
+      background: #f7f1e9;
+      border-radius: 18px;
+      padding: 1.2rem 1.6rem;
+      margin: 1.8rem 0;
+      border: 1px solid #ddd3c5;
+    }
+    .note-box p {
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    /* 列表 - 亮点 */
+    .feature-list {
+      list-style: none;
+      margin: 1.6rem 0 1.2rem;
+    }
+    .feature-list li {
+      position: relative;
+      padding-left: 1.8rem;
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+    }
+    .feature-list li::before {
+      content: "·";
+      position: absolute;
+      left: 0.4rem;
+      color: #9b8874;
+      font-weight: bold;
+      font-size: 1.4rem;
+    }
+
+    /* 场景卡片 */
+    .scene-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin: 2rem 0 1.2rem;
+    }
+    .scene-card {
+      flex: 1 1 200px;
+      background: #fbf8f3;
+      border-radius: 20px;
+      padding: 1.2rem 1.2rem 1rem;
+      border: 1px solid #e6dbce;
+      transition: box-shadow 0.2s;
+    }
+    .scene-card h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #4d3f32;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.02em;
+    }
+    .scene-card p {
+      font-size: 0.9rem;
+      color: #5d5348;
+      margin-bottom: 0;
+    }
+
+    /* 小标题 */
+    h2 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #4b3f34;
+      margin: 2rem 0 0.8rem;
+      letter-spacing: 0.01em;
+    }
+    h2:first-of-type { margin-top: 0; }
+
+    /* FAQ 摘要 */
+    .faq-item {
+      margin-bottom: 1.2rem;
+    }
+    .faq-item h4 {
+      font-weight: 500;
+      color: #4b3d30;
+      margin-bottom: 0.2rem;
+      font-size: 1rem;
+    }
+    .faq-item p {
+      margin-bottom: 0;
+      font-size: 0.95rem;
+      color: #5c5145;
+    }
+
+    /* 链接 */
+    a {
+      color: #7f684d;
+      text-decoration: none;
+      border-bottom: 1px dashed #c6b49e;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    a:hover {
+      color: #4b3b2a;
+      border-bottom-style: solid;
+    }
+
+    /* 底部 */
+    .footer-note {
+      margin-top: 2.8rem;
+      padding-top: 1.6rem;
+      border-top: 1px solid #e6dace;
+      font-size: 0.85rem;
+      color: #8b7d6e;
+      text-align: center;
+    }
+
+    /* 响应式 */
+    @media (max-width: 540px) {
+      body { padding: 1rem 0.8rem; }
+      .page { padding: 1.6rem 1.2rem; }
+      .hero h1 { font-size: 1.7rem; }
+      .scene-card { flex: 1 1 100%; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="hero">
+    <h1>彩票网 <span class="sub">快速识别 · 选号面板</span></h1>
+  </div>
+
+  <!-- 摘要 -->
+  <div class="intro">
+    <p>第一次打开一个彩票类的网站，最怕满屏弹窗、找不到号码区、不知道该点哪里。如果你也有类似预感，那<strong>彩票网</strong>走的是另一条路：它把数字型彩票的核心功能——选号、查看规则、即时参考——集中在一个干净的页面上，没有多余的跳转，也没有诱导分享的浮层。</p>
+    <p>简单说，这是一个“面板型”站点。你打开就能看到号码选择区，适合想快速完成投注动作或验证自己思路的人。往下翻，会发现玩法说明也写得直白，不会丢给你一堆专业术语。</p>
+  </div>
+
+  <!-- 提示框：使用建议 -->
+  <div class="insight">
+    <p><strong>💡 使用建议</strong></p>
+    <p>如果你是第一次用，可以先用“模拟选号”熟悉面板布局，或者直接参考历史号码趋势。不需要注册也能浏览大部分内容。如果遇到不熟悉的玩法，页面上一般有简短的规则说明，不用再切出去搜索。</p>
+    <p>另外，每天不同时段的数据更新频率会有差异，建议在开奖前预留一点核对时间。</p>
+  </div>
+
+  <!-- 亮点 -->
+  <h2>几个让人舒服的细节</h2>
+  <ul class="feature-list">
+    <li><strong>面板清晰</strong> —— 号码区用按钮排列，快速点击即选，误操作也能一键清空。</li>
+    <li><strong>规则透明</strong> —— 每个彩种下方都附了基础说明，包括奖级、选号范围、开奖节奏，不用到处翻帮助页。</li>
+    <li><strong>数据加载轻</strong> —— 没有巨大的动图和自动播放的视频，页面打开快，对手机流量也友好。</li>
+    <li><strong>没有强推注册</strong> —— 你完全可以先逛一圈，觉得顺手再决定要不要用其他功能。</li>
+  </ul>
+
+  <!-- 场景 -->
+  <h2>什么情况下会用上它？</h2>
+  <div class="scene-grid">
+    <div class="scene-card">
+      <h3>日常选号</h3>
+      <p>打开 <a href="https://cn-panel-lottery.com">彩票网</a> 直接进入选号状态，不用经过首页、弹窗、二级菜单，适合快速操作。</p>
+    </div>
+    <div class="scene-card">
+      <h3>核对思路</h3>
+      <p>如果你有自己的号码组合习惯，可以对照面板上的近期开奖记录，看看冷热号分布，再调整个别数字。</p>
+    </div>
+    <div class="scene-card">
+      <h3>了解新玩法</h3>
+      <p>偶尔看到一个没听过的彩种，点进详情就能看到简介和奖金结构，不用下载额外文档。</p>
+    </div>
+  </div>
+
+  <!-- 引用块：可信但克制 -->
+  <div class="note-box">
+    <p><strong>关于可靠性的几句话</strong></p>
+    <p>任何彩票类工具都不能提高中奖概率，这是基本常识。彩票网所做的，是把选号界面和官方开奖信息整合到一个友好的面板里，减少你查找信息的时间成本。网站本身不提供任何形式的预测、包中承诺，也没有捆绑付费的“杀号”“稳赚”服务。</p>
+    <p>如果你看到任何页面内容让你觉得“太夸张”，请保持理性。娱乐有度，量力而行。</p>
+  </div>
+
+  <!-- FAQ 摘要 -->
+  <h2>常见疑问（摘要）</h2>
+  <div class="faq-item">
+    <h4>需要注册才能用吗？</h4>
+    <p>浏览和查看号码面板不需要账号。个别功能（比如保存自选组合）可能会提示登录，但绝大多数核心操作无需注册。</p>
+  </div>
+  <div class="faq-item">
+    <h4>数据来自哪里？</h4>
+    <p>页面上的开奖号码和走势图均引用自公开数据源，更新速度受第三方接口影响，一般会在官方公布后几分钟内同步。</p>
+  </div>
+  <div class="faq-item">
+    <h4>手机端适配怎么样？</h4>
+    <p>站点采用响应式布局，手机浏览器直接访问就能自适应，按钮大小也做了触摸优化，不会出现点不准的情况。</p>
+  </div>
+
+  <div class="footer-note">
+    理性选号 · 娱乐为主 · 量力而行
+  </div>
+</div>
+</body>
+</html>
